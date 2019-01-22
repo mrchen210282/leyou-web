@@ -11,15 +11,26 @@ import 'vuetify/dist/vuetify.min.css'
 import qs from 'qs'
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/material.css'
+import VueCookie from 'vue-cookie'
 
 Vue.use(Vuetify, { theme: config.theme})
 Vue.use(MyComponent)
+Vue.use(VueCookie)
 Vue.prototype.$qs = qs;
+Vue.prototype.$cookie = VueCookie
 
 Vue.config.productionTip = false;
 
 Vue.prototype.verify = function () {
-  return this.$http.get("/auth/verify")
+  let token = Vue.$cookie.get('token');
+  console.log(token);
+  return Vue.axios.get('/auth/verify',{
+    params:{
+      'ly-token': token
+    }}).then(resp =>{
+    Vue.$cookie.set("token",resp.data.token);
+  })
+   ;
 };
 
 /* eslint-disable no-new */

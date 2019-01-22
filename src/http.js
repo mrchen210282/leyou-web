@@ -6,6 +6,7 @@ axios.defaults.baseURL = config.api;
 axios.defaults.timeout = 3000;
 axios.defaults.withCredentials = true;
 
-
 Vue.prototype.$http = axios;
+Vue.prototype.axios = axios;
+
 

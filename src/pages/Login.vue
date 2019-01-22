@@ -1,3 +1,4 @@
+
 <template>
   <v-app>
     <v-content>
@@ -65,11 +66,19 @@
         const form ={};
         form.username = this.username;
         form.password = this.password;
-
-        this.$http.post("/auth/accredit", this.$qs.stringify(form)).then(resp =>{
+        // this.$qs.stringify(form)
+        this.axios({
+          headers: {
+            'Content-Type':'application/json'},
+          method: 'POST',
+          url: '/auth/accredit',
+          data:form
+        }).then(resp =>{
           if (resp.status === 200){
-             //页面跳转
 
+            this.$cookie.set("token",resp.data.token);
+
+             //页面跳转
             if (this.backPath === "/"){
               this.$router.push("/index/dashboard");
             } else {
