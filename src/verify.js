@@ -8,11 +8,10 @@ import Vue from 'vue'
 Vue.prototype.verify = function () {
    let token = Vue.$cookie.get('token');
    console.log(token);
-   Vue.axios.get('/auth/verify',{
+  return Vue.axios.get('/auth/verify',{
      params:{
-      'ly-token': token
+      'token': token
     }}).then(resp =>{
     Vue.$cookie.set("token",resp.data.token);
   })
-  return ;
 };
