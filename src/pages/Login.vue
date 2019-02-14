@@ -66,6 +66,7 @@
         const form ={};
         form.username = this.username;
         form.password = this.password;
+        form.sign = "back";
         // this.$qs.stringify(form)
         this.axios({
           headers: {
