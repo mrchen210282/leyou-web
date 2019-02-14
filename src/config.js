@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:10010';
+const baseUrl = 'http://192.168.31.129:10010';
 const config = {
   locale: 'zh-CN', // en-US, zh-CN
   url: baseUrl,
