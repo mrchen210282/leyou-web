@@ -13,8 +13,8 @@
         >
           <template slot="items" slot-scope="props">
             <!--<td class="text-xs-left">{{ props.item.name }}</td>-->
-            <td class="text-xs-left">
-              <v-img :src="props.item.name" style="width: 100px;height: 50px;">
+            <td class="text-xs-left" style="width:100px; height: 50px">
+              <v-img :src="props.item.name" style="width: 100%;height: 100%;">
               </v-img>
             </td>
             <td class="text-xs-left">{{ props.item.calories }}</td>
@@ -65,13 +65,13 @@
         ],
         desserts: [
           {
-            name: 'http://img5.duitang.com/uploads/item/201409/23/20140923094045_BNYji.thumb.700_0.png',
+            name: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550229051347&di=3ab85a8b4493f0b8010032993b412646&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201504%2F23%2F20150423H5512_hxUim.jpeg',
             calories: 159,
             fat: 6.0,
 
           },
           {
-            name: 'http://img5.duitang.com/uploads/item/201409/23/20140923094045_BNYji.thumb.700_0.png',
+            name: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550229051347&di=3ab85a8b4493f0b8010032993b412646&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201504%2F23%2F20150423H5512_hxUim.jpeg',
             calories: 237,
             fat: 9.0,
 
