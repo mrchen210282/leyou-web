@@ -1,5 +1,13 @@
 <template>
   <v-card>
+    <v-card-title>
+      <v-btn dark color="indigo" @click="addCategory">添加一级分类</v-btn>
+      <!--<v-btn fab dark color="error">-->
+        <!--<v-icon class="pt-3" dark>delete</v-icon>-->
+      <!--</v-btn>-->
+      <!--<v-spacer></v-spacer>-->
+      <!--<v-text-field label="搜索" class="flex sm3"  append-icon="search" v-model="search"></v-text-field>-->
+    </v-card-title>
       <v-flex xs12 sm10>
         <v-tree ref="tree"  url="/item/category/list"
                 :isEdit="isEdit"
@@ -9,10 +17,25 @@
                 @handleClick="handleClick"
         />
       </v-flex>
+    <v-dialog v-model="show" scrollable persistent max-width="500px">
+      <v-card color="blue lighten-4" class="white--text">
+        <v-card-title>
+          <span class="headline">{{isEdit?'修改':'新增'}}分类</span>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="show = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text class="px-5">
+          <my-category-form @reload="reload" v-bind:isEdit="isEdit" v-bind:oldCategory="oldCategory"></my-category-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
+  import MyCategoryForm from './MyCategoryForm'
   export default {
     name: "category",
     data() {
@@ -20,9 +43,19 @@
         //treeData: treeData,
         isEdit:true,
         leafNode:[],
+        show:false,  //控制对话框的显示
+        oldCategory:{}, //回显要修改的数据
       }
     },
     methods: {
+      addCategory(){
+        this.verify().then(() => {
+          this.isEdit=false;
+          this.show=true;
+        }).catch(() => {
+          this.$router.push("/login");
+        });
+      },
       handleAdd(node) {
         if (node.parentId !== 0) {
           this.verify().then(() => {
@@ -31,7 +64,7 @@
               url: '/item/category',
               data: this.$qs.stringify(node)
             }).then(() => {
-              this.reloadData(node.id);
+              this.reload(node.id);
             }).catch();
           }).catch(() => {
             this.$router.push("/login");
@@ -73,10 +106,15 @@
       handleClick(node) {
         //console.log(node)
       },
-      reloadData(id){
+      reload(id){
         //操作完成后刷新数据
+        //关闭对话框
+        this.show=false;
         this.$http.get("/item/category/list?pid="+id).then().catch();
       }
+    },
+    components:{
+      MyCategoryForm
     }
   };
 </script>
