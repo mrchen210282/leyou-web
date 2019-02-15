@@ -17,6 +17,15 @@ var menus = [
     ]
   },
   {
+    action: "apps",
+    title: "广告管理",
+    path:"/item",
+    items: [
+      { title: "幻灯片", path: "/banner" },
+      { title: "广告推广",path: "/advertising"},
+    ]
+  },
+  {
     action: "people",
     title: "会员管理",
     path:"/user",

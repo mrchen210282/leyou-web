@@ -1,4 +1,4 @@
-<template>
+  <template>
   <v-form  ref="SeckillForm">
       <v-container grid-list-md>
         <v-layout column wrap>
